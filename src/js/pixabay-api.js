@@ -13,13 +13,9 @@ export class PicturesApiService {
   async fetchPictures() {
     try {
       const response = await axios.get(
-        `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`
-      );
-      Notify.success(`Hooray! We found ${response.data.totalHits} images.`, {
-        timeout: 5000,
-      });
+      `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`);
       this.page += 1;
-      return response.data.hits;
+      return response.data;
     } catch (error) {
       console.error(error);
     }
