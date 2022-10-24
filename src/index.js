@@ -18,7 +18,6 @@ function onSubmit(e) {
 
   picturesApiService.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
 
-  picturesApiService.resetPage()
   clearMarkup()
   fetchPictures()
 }
@@ -38,13 +37,29 @@ function fetchPictures() {
     lightbox.refresh();
     button.classList.remove('is-hidden')
 
-    if (gallery.childElementCount === data.totalHits) {
+    if (gallery.childElementCount > 40) {
+      smoothScroll();
+    } 
+
+    if (gallery.childElementCount >= data.totalHits) {
       Notify.info("We're sorry, but you've reached the end of search results.");
-      button.classList.add('is-hidden')
+      button.classList.add('is-hidden');
     }
   });
 }
 
 function clearMarkup() {
   gallery.innerHTML = '';
+  picturesApiService.resetPage();
+}
+
+function smoothScroll() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+    top: cardHeight * 2.5,
+    behavior: 'smooth',
+  });
 }
