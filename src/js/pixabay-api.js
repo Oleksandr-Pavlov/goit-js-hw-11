@@ -1,4 +1,3 @@
-import { Notify } from 'notiflix';
 const axios = require('axios').default;
 
 const API_KEY = '30800141-5155b96734261143d4ff6b69f';
