@@ -18,17 +18,24 @@ function onSubmit(e) {
 
   picturesApiService.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
 
-  clearMarkup()
+  clearMarkup();
   fetchPictures()
+  // if (e.currentTarget.elements.searchQuery.value.trim() === picturesApiService.searchQuery) {
+  //   return;
+  // }
+  // console.log(picturesApiService.searchQuery);
+  // console.log(e.currentTarget.elements.searchQuery.value.trim());
+  // console.log(e.target);
 }
 
 function fetchPictures() {
   picturesApiService.fetchPictures().then(data => {
     if (picturesApiService.searchQuery === '' || data.hits.length === 0) {
+      button.classList.add('is-hidden');
       return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
     } 
 
-    if ((gallery.innerHTML === '')) {
+    if (gallery.innerHTML === '') {
       Notify.success(`Hooray! We found ${data.totalHits} images.`);
     }
     
