@@ -16,16 +16,16 @@ button.classList.add('is-hidden')
 function onSubmit(e) {
   e.preventDefault()
 
-  picturesApiService.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+  const searchQuery = e.currentTarget.elements.searchQuery.value.toLowerCase().trim();
+
+  if (picturesApiService.searchQuery === searchQuery) {
+    return;
+  }
+
+  picturesApiService.searchQuery = searchQuery;
 
   clearMarkup();
   fetchPictures()
-  // if (e.currentTarget.elements.searchQuery.value.trim() === picturesApiService.searchQuery) {
-  //   return;
-  // }
-  // console.log(picturesApiService.searchQuery);
-  // console.log(e.currentTarget.elements.searchQuery.value.trim());
-  // console.log(e.target);
 }
 
 function fetchPictures() {
