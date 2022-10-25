@@ -18,9 +18,9 @@ function onSubmit(e) {
 
   const searchQuery = e.currentTarget.elements.searchQuery.value.toLowerCase().trim();
 
-  // if (picturesApiService.searchQuery === searchQuery) {
-  //   return;
-  // }
+  if (picturesApiService.searchQuery === searchQuery) {
+    return;
+  }
 
   picturesApiService.searchQuery = searchQuery;
 
